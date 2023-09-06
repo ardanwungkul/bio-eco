@@ -17,7 +17,6 @@ class TokoController extends Controller
     }
     public function store(Request $request)
     {
-        $item = $request->input('link');
         $user_id = Auth::user()->id;
         $request->validate(
             [
@@ -38,7 +37,7 @@ class TokoController extends Controller
 
         $toko->gambar = $nama_file;
 
-        $toko->url = Str::random(3) . $request->nama;
+        $toko->url = $request->url;
         $toko->save();
         return redirect()->route('dashboard.user');
     }
@@ -77,5 +76,17 @@ class TokoController extends Controller
 
         // Kirim respons sukses
         return response()->json(['success' => 'Template telah diubah.']);
+    }
+
+    public function checkUrl(Request $request)
+    {
+        $urlToCheck = $request->input('url');
+        $toko = Toko::where('url', $urlToCheck)->first();
+
+        if ($toko) {
+            return response()->json(['exists' => true]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
     }
 }

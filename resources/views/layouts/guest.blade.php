@@ -18,12 +18,12 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div
-        class="h-screen pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900 gap-5 grid grid-cols-2 place-content-center overflow-hidden">
+        class="sm:h-screen min-h-screen pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900 gap-5 grid grid-cols-2 place-content-center overflow-hidden px-5 sm:px-0">
         <div
-            class="w-full sm:max-w-md mt-6 px-6 py-6 bg-white dark:bg-gray-800 shadow-xl overflow-hidden sm:rounded-lg h-min place-self-center border border-white">
+            class="w-full sm:max-w-md mt-6 px-6 py-6 bg-white dark:bg-gray-800 shadow-xl overflow-hidden rounded-lg h-min place-self-center border border-white sm:col-span-1 col-span-2">
             {{ $slot }}
         </div>
-        <div class="overflow-hidden self-center place-self-center">
+        <div class="overflow-hidden self-center place-self-center hidden sm:flex">
             <lottie-player src="https://lottie.host/01a9bd4e-8fac-4e19-983f-1abe46a99a6d/BhCl6raK6L.json"
                 background="transparent" speed="1" mode="bounce" loop autoplay></lottie-player>
         </div>

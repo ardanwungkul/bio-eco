@@ -16,47 +16,58 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+                    @elseif(Auth::user())
+                        <x-nav-link :href="route('dashboard.user')" :active="request()->routeIs('dashboard.user')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-transparent hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+            @if (Auth::user())
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                        data-dropdown-placement="bottom-end"
+                        class=" inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-gray-300 hover:text-white focus:outline-none transition ease-in-out duration-150"
+                        type="button">
+                        {{ auth::user()->name }}
+                        <div class="ml-1">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="dropdown"
+                        class="z-10 hidden rounded-lg divide-gray-100  text-left text-sm leading-5 text-gray-700 dark:text-gray-300 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 dark:bg-gray-800 bg-white border border-blue-900 dark:border-white ">
+                        <ul class=" text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                            <li>
+                                <a href="{{ route('profile.edit') }}"
+                                    class="block py-2 dark:hover:bg-gray-600 rounded-lg dark:hover:text-white"
+                                    style="padding-left: 16px; padding-right: 100px">Profile</a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                this.closest('form').submit();"
+                                        class="block py-2 dark:hover:bg-gray-600 rounded-lg dark:hover:text-white"
+                                        style="padding-left: 16px; padding-right: 100px">Logout</a>
+                                </form>
+                            </li>
 
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+                        </ul>
+                    </div>
+                </div>
+            @else
+                <x-nav-link :href="route('login')" class="hidden sm:flex sm:items-center sm:ml-6">
+                    {{ __('Login') }}
+                </x-nav-link>
+            @endif
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">

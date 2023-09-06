@@ -11,23 +11,32 @@
             <p class="text-center mx-12 font-poppins text-sm text-gray-400">{{ $toko->bio }}</p>
         </div>
         <div class="mb-5 flex justify-center gap-3 ">
-            <img width="25px" height="25px" src="{{ asset('storage/icon/instagram.svg') }}" alt="">
-            <img width="25px" height="25px" src="{{ asset('storage/icon/facebook.svg') }}" alt="">
-            <img width="25px" height="25px" src="{{ asset('storage/icon/youtube.svg') }}" alt="">
+            @foreach ($toko->socmed as $item)
+                <a href="{{ $item->url }}">
+                    <img width="25px" height="25px" src="{{ asset('storage/icon/') }}/{{ $item->gambar }}"
+                        alt="">
+                </a>
+            @endforeach
         </div>
 
 
 
         <div class="grid grid-cols-2 gap-5 px-10 py-2">
-            @foreach ($product as $item)
-                <div class=" rounded-lg shadow-lg bg-white" data-aos="fade-up" data-aos-once="true"
-                    data-aos-duration="1000">
-                    <button class="hover:scale-125 transition duration-1000 w-full h-full"
+            @foreach ($shuffleProduk->take(4) as $item)
+                <div>
+                    <button class="hover:scale-105 transition duration-1000 w-full h-full"
                         data-modal-target="showProduct-{{ $item->id }}"
                         data-modal-toggle="showProduct-{{ $item->id }}">
-                        <div class=" w-full flex justify-center items-center h-full">
-                            <img class="lozad rounded-lg h-32 object-cover"
-                                src="{{ asset('storage/images/product') }}/{{ $item->gambar }}" alt="">
+                        <div class="rounded-lg shadow-lg bg-white w-full" data-aos="fade-up" data-aos-once="true"
+                            data-aos-duration="1000">
+                            <div class="h-44">
+                                <div>
+                                    <img class="lozad rounded-t-lg object-cover h-32 w-full"
+                                        src="{{ asset('storage/images/product') }}/{{ $item->gambar }}" alt="">
+                                </div>
+                                <p class="text-start font-bold px-3 py-1 text-sm text-ellipsis line-clamp-2">
+                                    {{ $item->nama }}</p>
+                            </div>
                         </div>
                     </button>
                 </div>
@@ -53,8 +62,8 @@
                             </div>
                             <!-- Modal body -->
                             <div>
-                                <div class="flex justify-center px-3">
-                                    <img class="w-full object-cover max-h-52 rounded-xl"
+                                <div class=" px-3">
+                                    <img class="max-h-52  object-contain rounded-xl mx-auto"
                                         src="{{ asset('storage/images/product/') }}/{{ $item->gambar }}"
                                         alt="">
                                 </div>
@@ -73,17 +82,16 @@
                                 </div>
                                 <div class="px-5 pb-5">
                                     <div class="flex gap-2">
-                                        <a
-                                            href="https://api.whatsapp.com/send/?phone={{ $toko->no_hp }}&text&type=phone_number&app_absent=0">
+                                        <a href="//wa.me/{{ $toko->no_hp }}">
                                             <button class="px-3 py-2 border border-white rounded-lg text-sm"><i
                                                     class="fa-regular fa-comment text-white"></i></button>
                                         </a>
-                                        <button
+                                        <a href="//wa.me/{{ $toko->no_hp }}?text=Halo%20kak%2C%20Saya%20Ingin%20Membeli%20Produk%20{{ $item->nama }}"
                                             class="px-3 py-2 border border-cyan-700 text-cyan-700 rounded-lg text-sm w-full">Beli
-                                            Sekarang</button>
-                                        <button
+                                            Sekarang</a>
+                                        <a href="//wa.me/{{ $toko->no_hp }}?text=Halo%20kak%2C%20Saya%20Ingin%20Bergabung%20Menjadi%20Member"
                                             class="px-3 py-2 bg-cyan-700 text-white rounded-lg text-sm w-full">Daftar
-                                            Member</button>
+                                            Member</a>
                                     </div>
                                 </div>
                             </div>

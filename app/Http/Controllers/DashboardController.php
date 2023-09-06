@@ -29,11 +29,10 @@ class DashboardController extends Controller
 
     public function urlUser($url)
     {
-        $toko = Toko::where('url', $url)->first();
+        $toko = Toko::where('url', $url)->with('socmed')->first();
         if (!$toko) {
             abort(404);
         }
-        // $shuffleToko = $shuffleToko->pluck('nama_kolom')->toArray();
         $product = Product::all();
         $shuffleProduk = $product->shuffle();
         return view('view', compact('toko', 'product', 'shuffleProduk'));

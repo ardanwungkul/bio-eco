@@ -30,6 +30,7 @@ Route::middleware(['auth', 'admin:0'])->group(function () {
     Route::get('/signup-next-step', [TokoController::class, 'create'])->name('signup-next-step');
     Route::post('/toko/store', [TokoController::class, 'store'])->name('toko.store');
     Route::put('/toko/template-change/{id}', [TokoController::class, 'template'])->name('change-template');
+    Route::post('/toko/check-url', [TokoController::class, 'checkUrl']);
     Route::put('/toko/{toko}/update', [TokoController::class, 'update'])->name('toko.update');
     Route::delete('/link/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
     Route::post('/link/store', [LinkController::class, 'store'])->name('link.store');

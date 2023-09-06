@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="flex min-h-screen">
-        <div class="py-5 px-20 flex-auto">
+    <div class="flex sm:flex-row flex-col-reverse min-h-screen">
+        <div class="py-5 sm:px-20 px-5 flex-auto">
             <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap justify-evenly -mb-px text-sm font-medium text-center" id="myTab"
                     data-tabs-toggle="#myTabContent" role="tablist">
@@ -30,6 +30,7 @@
                 </ul>
             </div>
             <div id="myTabContent">
+                {{-- Link --}}
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
                     aria-labelledby="profile-tab">
                     <div>
@@ -53,51 +54,59 @@
                         </div>
                     </fieldset>
                 </div>
+                {{-- Design --}}
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel"
                     aria-labelledby="dashboard-tab">
-                    <div class="grid grid-cols-3 place-content-center gap-3">
-                        {{-- <div class="">
-                            <div class=" h-[300px] w-[200px] border-4 border-black overflow-hidden rounded-2xl mx-auto">
-                                <iframe src="{{ config('app.url') }}:8000/template/template1"
-                                    class="scale-50 -translate-x-[26%] -translate-y-[25%]" frameborder="0"
-                                    style="width: 400px; height:600px"></iframe>
-                            </div>
-                        </div> --}}
+                    <div class="grid sm:grid-cols-3 grid-cols-2 place-content-center gap-3">
                         <div>
                             <button id="ubahTemplate1" data-template="1"
-                                class="w-[200px] rounded-2xl mx-auto overflow-hidden shadow-lg border border-gray-400 border-opacity-40">
+                                class="sm:w-[200px] rounded-2xl mx-auto overflow-hidden shadow-lg border border-gray-400 border-opacity-40">
                                 <div
                                     class="grid grid-cols-2 place-content-center place-items-center gap-3 px-5 py-10 bg-gray-100">
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow-lg shadow-gray-400 rounded-lg bg-white"></div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow-lg shadow-gray-400 rounded-lg bg-white">
+                                    </div>
                                 </div>
                                 <p class="my-2"> Basic Template</p>
                             </button>
                         </div>
                         <div>
                             <button id="ubahTemplate2" data-template="2"
-                                class="w-[200px] rounded-2xl mx-auto overflow-hidden shadow-lg border border-gray-400 border-opacity-40">
+                                class="sm:w-[200px] rounded-2xl mx-auto overflow-hidden shadow-lg border border-gray-400 border-opacity-40">
                                 <div
                                     class="grid grid-cols-2 place-content-center place-items-center gap-3 px-5 py-10 bg-gray-900">
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
-                                    <div class="w-20 h-10 shadow shadow-gray-400 rounded-lg bg-white"></div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
+                                    <div class="sm:w-20 sm:h-10 w-10 h-5 shadow shadow-gray-400 rounded-lg bg-white">
+                                    </div>
                                 </div>
                                 <p class="my-2"> Dark Template</p>
                             </button>
                         </div>
                     </div>
                 </div>
+                {{-- Stat --}}
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel"
                     aria-labelledby="settings-tab">
                 </div>
+                {{-- Setting --}}
                 <div class="hidden rounded-lg " id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                     <form action="{{ route('toko.update', $toko->id) }}" class="space-y-3" method="POST">
                         @csrf
@@ -118,9 +127,9 @@
                         <div class="ctn rounded-lg p-[2px]">
                             <div class="space-y-3 bg-white p-4 rounded-lg">
 
-                                <div class="flex gap-3">
+                                <div class="sm:flex gap-3">
                                     <div
-                                        class="relative rounded-full border-opacity-70 flex items-center w-32 h-32 justify-center overflow-hidden ">
+                                        class="relative rounded-full border-opacity-70 flex items-center w-32 h-32 justify-center overflow-hidden mx-auto">
                                         <img id="fotoProfil" class="object-cover w-32 h-32 "
                                             src="{{ asset('storage/images/fotoProfil') }}/{{ $toko->gambar }}"
                                             alt="">
@@ -145,7 +154,7 @@
                                             }
                                         </script>
                                     </div>
-                                    <div class="space-y-3 flex-auto">
+                                    <div class="space-y-3 flex-auto mt-3 sm:mt-0">
                                         <div class="space-y-1">
                                             <input type="text" placeholder="Enter Your Name" name="nama"
                                                 required value="{{ $toko->nama }}"
@@ -153,21 +162,21 @@
                                         </div>
                                         <div class="space-y-3">
                                             <textarea type="text" placeholder="Masukan Bio" name="bio" required
-                                                class="w-full hover:bg-[#e7e7e9] bg-[#0D0C220c] border-none text-sm rounded py-2.5 col-span-4 text-start h-auto min-h-min overflow-hidden ">{{ $toko->bio }}</textarea>
+                                                class="w-full hover:bg-[#e7e7e9] bg-[#0D0C220c] border-none text-sm rounded py-2.5 col-span-4 text-start">{{ $toko->bio }}</textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="grid-cols-5 grid gap-3">
-                                    <div class="col-span-1 flex justify-between">
-                                        <label class="text-sm">No Hp</label>
+                                <div class="grid-cols-5 sm:grid gap-3">
+                                    <div class="col-span-1 justify-between hidden sm:flex">
+                                        <label class="text-sm ">No Hp</label>
                                         <p class="text-sm">:</p>
                                     </div>
                                     <input type="text" placeholder="Masukan Nomor Hp" name="no_hp"
                                         value="{{ $toko->no_hp }}"
                                         class="w-full hover:bg-[#e7e7e9] bg-[#0D0C220c] border-none text-sm rounded py-2.5 col-span-4">
                                 </div>
-                                <div class="grid-cols-5 grid gap-3">
-                                    <div class="col-span-1 flex justify-between">
+                                <div class="grid-cols-5 sm:grid gap-3">
+                                    <div class="col-span-1 justify-between hidden sm:flex">
                                         <label class="text-sm">Alamat</label>
                                         <p class="text-sm">:</p>
                                     </div>
@@ -185,7 +194,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/3 flex-none mt-10">
+        <div class="sm:w-1/3 flex-none mt-10">
             <div class="border-4 border-black justify-self-center rounded-3xl overflow-hidden mx-auto"
                 style="width: 200px; height: 400px;">
                 <iframe id="iframe" src="http://localhost:8000/{{ $toko->url }}"
