@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\Product;
+use App\Models\Productuser;
 use App\Models\Toko;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class DashboardController extends Controller
         if ($user->toko->count() > 0) {
             $users = Auth::user()->id;
             $toko = Toko::where('user_id', $user->id)->first();
-            return view('dashboard', compact('toko'));
+            $product = Productuser::where('toko_id', $toko->id)->get();
+            return view('dashboard', compact('toko', 'product'));
         } else {
             return redirect()->route('signup-next-step');
         }
@@ -34,7 +36,9 @@ class DashboardController extends Controller
             abort(404);
         }
         $product = Product::all();
+        $productUser = Productuser::where('toko_id', $toko->id)->get();
         $shuffleProduk = $product->shuffle();
-        return view('view', compact('toko', 'product', 'shuffleProduk'));
+        $shuffleProdukUser = $productUser->shuffle();
+        return view('view', compact('toko', 'product', 'shuffleProduk', 'shuffleProdukUser'));
     }
 }

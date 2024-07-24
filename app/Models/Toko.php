@@ -19,7 +19,8 @@ class Toko extends Model
         'alamat',
         'template',
         'gambar',
-        'user_id'
+        'user_id',
+        'default_product',
     ];
     public function user()
     {
@@ -33,5 +34,13 @@ class Toko extends Model
     public function socmed()
     {
         return $this->hasMany(Socmed::class);
+    }
+    public function product()
+    {
+        return $this->hasMany(Productuser::class);
+    }
+    public function whatsapp()
+    {
+        return $this->hasMany(WhatsappLink::class);
     }
 }

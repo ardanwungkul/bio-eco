@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('template')->default(1);
             $table->string('gambar')->nullable();
+            $table->boolean('default_product')->default(1);
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('cascade')->change();
             $table->timestamps();

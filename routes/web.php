@@ -25,16 +25,25 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth', 'admin:0'])->group(function () {
-    Route::get('/', [DashboardController::class, 'home'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.user');
     Route::get('/signup-next-step', [TokoController::class, 'create'])->name('signup-next-step');
+    // Toko
     Route::post('/toko/store', [TokoController::class, 'store'])->name('toko.store');
     Route::put('/toko/template-change/{id}', [TokoController::class, 'template'])->name('change-template');
     Route::post('/toko/check-url', [TokoController::class, 'checkUrl']);
     Route::put('/toko/{toko}/update', [TokoController::class, 'update'])->name('toko.update');
+    Route::put('/toko/product-change/{id}', [TokoController::class, 'changetoko'])->name('changetoko');
+    // Link
     Route::delete('/link/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
-    Route::post('/link/store', [LinkController::class, 'store'])->name('link.store');
+    Route::delete('/whatsapp/{whatsapp}', [LinkController::class, 'WhatsappDestroy'])->name('whatsapp.destroy');
+    Route::post('/link/store/', [LinkController::class, 'store'])->name('link.store');
+    Route::post('/whatsapp/store/', [LinkController::class, 'whatsapp'])->name('whatsapp.store');
+    Route::put('/link/edit/{id}', [LinkController::class, 'update'])->name('link.update');
+    Route::put('/whatsapp/edit/{id}', [LinkController::class, 'whatsappUpdate'])->name('whatsapp.update');
+    // Socmed
     Route::post('/socmed/store', [SocmedController::class, 'store'])->name('socmed.store');
+    // Product
+    Route::post('/user/product/store/{toko}', [ProductController::class, 'userStore'])->name('productUser.store');
 });
 
 Route::middleware(['auth', 'admin:1'])->group(function () {
@@ -52,11 +61,6 @@ Route::middleware('auth')->group(function () {
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleCallback']);
 Route::get('/{url}', [DashboardController::class, 'urlUser'])->name('url.user');
-Route::get('/template/template1', function () {
-    return view('template.1');
-});
-Route::get('/template/template2', function () {
-    return view('template.2');
-});
+Route::get('/', [DashboardController::class, 'home'])->name('home');
 
 require __DIR__ . '/auth.php';

@@ -1,5 +1,25 @@
 <x-app-layout>
+    <style>
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
 
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #checkResultExist {
+            animation: fadeOut 3s ease-in-out;
+            opacity: 0;
+        }
+
+        #checkResult {
+            animation: fadeOut 3s ease-in-out;
+            opacity: 0;
+        }
+    </style>
     <div id="inputError"
         class="inputError hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative m-3">
         <li><span class="block sm:inline">Url Mengandung Karakter Tidak Valid</span></li>
@@ -17,6 +37,14 @@
         <div class="w-full flex justify-center py-10 h-full">
             <div class="max-w-lg w-full px-5 sm:px-0 space-y-3">
                 <p class="text-2xl font-extrabold mb-5 text-center">Setup Your Page</p>
+                <div id="checkResultExist"
+                    class="checkResultExist hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition ease-out duration-1000">
+                    <li><span class="block sm:inline">Url Sudah Digunakan !!</span></li>
+                </div>
+                <div id="checkResult"
+                    class="checkResult hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                    <li><span class="block sm:inline">Url Dapat Digunakan</span></li>
+                </div>
                 <div class="flex gap-3">
                     <div class="bg-gradient-to-r from-cyan-900 to bg-cyan-600 px-4 py-1 rounded-lg w-full">
                         <div class="flex gap-3">
@@ -32,7 +60,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="w-full bg-white backdrop-blur-sm rounded-xl p-8 border-2 border-[#61677A]  ">
 
                     <div class="sm:flex justify-between gap-5 items-center">
@@ -107,12 +134,13 @@
 
     // Validasi Unique URL
     var urlInput = document.getElementById("textInput");
+    var checkResultExist = document.getElementById('checkResultExist');
+    var checkResult = document.getElementById('checkResult');
     document.addEventListener("DOMContentLoaded", function() {
 
         function checkUrl() {
             var urlToCheck = urlInput.value;
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
             $.ajax({
                 type: "POST",
                 url: "toko/check-url",
@@ -123,8 +151,17 @@
                 success: function(response) {
                     if (response.exists) {
                         // URL sudah ada di database
-                        alert("URL sudah digunakan.");
+                        // alert("URL sudah digunakan.");
+                        checkResultExist.classList.remove('hidden');
+                        setTimeout(function() {
+                            checkResultExist.classList.add('hidden');
+                        }, 2000);
                         urlInput.value = "";
+                    } else {
+                        checkResult.classList.remove('hidden');
+                        setTimeout(function() {
+                            checkResult.classList.add('hidden');
+                        }, 3000);
                     }
                 },
                 error: function(error) {

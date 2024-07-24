@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Productuser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -42,6 +44,33 @@ class ProductController extends Controller
         $produk->save();
 
         return redirect()->route('product.index')->with(['success' => 'Produk Berhasil Ditambahkan']);
+    }
+    public function userStore(Request $request, $toko)
+    {
+        $request->validate(
+            [
+                'nama' => 'required',
+                'harga' => 'required',
+                'deskripsi' => 'required',
+                'image' => 'required',
+            ]
+        );
+
+        $produk = new Productuser();
+        $produk->nama = $request->nama;
+        $produk->harga = $request->harga;
+        $produk->deskripsi = $request->deskripsi;
+        $produk->toko_id = $toko;
+
+        $file = $request->file('image');
+        $nama_file = date('YmdHi') . $file->getClientOriginalName();
+        $path = 'storage/images/product/' . $nama_file;
+        Image::make($file)->widen(400)->save(public_path($path));
+
+        $produk->gambar = $nama_file;
+        $produk->save();
+
+        return redirect()->back()->with(['success' => 'Produk Berhasil Ditambahkan']);
     }
 
     public function destroy($product)

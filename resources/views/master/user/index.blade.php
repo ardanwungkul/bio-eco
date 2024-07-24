@@ -12,6 +12,10 @@
                             Nama User
                         </th>
                         <th scope="col" class="px-6 py-3 text-center border border-slate-600">
+                            Nama Toko
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 text-center border border-slate-600">
                             Email
                         </th>
                         <th scope="col" class="px-6 py-3 text-center border border-slate-600">
@@ -21,11 +25,19 @@
                 </thead>
                 <tbody>
                     @foreach ($user as $item)
+                        {{-- @if ($item->isAdmin == false) --}}
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4 border border-slate-600">
                                 <p class="font-extrabold text-gray-900">
                                     {{ $item->name }}
                                 </p>
+                            </td>
+                            <td class="px-6 py-4 border border-slate-600">
+                                @foreach ($item->toko as $items)
+                                    <p class="font-extrabold text-gray-900">
+                                        {{ $items->nama }}
+                                    </p>
+                                @endforeach
                             </td>
                             <td class="px-6 py-4 border border-slate-600 text-start">
                                 {{ $item->email }}
@@ -39,6 +51,7 @@
                                 </form>
                             </td>
                         </tr>
+                        {{-- @endif --}}
                     @endforeach
                 </tbody>
             </table>

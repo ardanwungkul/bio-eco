@@ -89,4 +89,11 @@ class TokoController extends Controller
             return response()->json(['exists' => false]);
         }
     }
+    public function changetoko($id, Request $request)
+    {
+        $toko = Toko::findOrFail($id);
+        $toko->default_product = $request->default_product;
+        $toko->save();
+        return response()->json(['success' => 'Product Views Berhasil Diubah.']);
+    }
 }
